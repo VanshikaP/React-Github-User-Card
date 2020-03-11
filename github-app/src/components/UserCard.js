@@ -7,7 +7,9 @@ class UserCard extends Component {
    state = {
             userData: [],
             followers: [],
+            followers_display: false,
             following: [],
+            following_display: false,
             repos: []
         }
     componentDidMount(){
@@ -50,6 +52,20 @@ class UserCard extends Component {
         }
     }
 
+    handleFollowersDisplay = () => {
+        this.setState({
+            ...this.state,
+            followers_display: !this.state.followers_display
+        })
+    }
+
+    handleFollowingDisplay = () => {
+        this.setState({
+            ...this.state,
+            following_display: !this.state.following_display
+        })
+    }
+
     render() {
         console.log('user data', this.state)
         return (
@@ -58,14 +74,38 @@ class UserCard extends Component {
                 <h2> {this.state.userData.name} </h2>
                 <div className = 'basic'>
                     <p>GitHub Username: {this.state.userData.login} </p>
-                    <p>Profile: {this.state.userData.html_url} </p>
-                    <div className='followers'>
-                        <p> {this.state.followers.length} followers</p>
-                        <p> {this.state.following.length} following</p>
+                    <p>Profile: <a href={this.state.userData.html_url}>{this.state.userData.html_url}</a></p>
+                    <div className='prople'>
+                        <div className='followers'>
+                            <p> {this.state.followers.length} <span className='people-display' onClick={this.handleFollowersDisplay}>followers</span></p>
+                            <div className={`followers-div ${!this.state.followers_display ? ' close' : ''}`} id='followers'>
+                                {this.state.followers.map(follower => {
+                                    return (
+                                        <div className='follower-card'>
+                                            <img className='follower-img' src={follower.avatar_url} alt={follower.login} />
+                                            <a href={follower.html_url}>{follower.login}</a>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                        <div className='following'>
+                            <p> {this.state.following.length} <span className='people-display' onClick={this.handleFollowingDisplay}>following</span></p>
+                            <div className={`following-div ${!this.state.following_display ? ' close' : ''}`} id='following'>
+                                {this.state.following.map(follower => {
+                                    return (
+                                        <div className='follower-card'>
+                                            <img className='follower-img' src={follower.avatar_url} alt={follower.login} />
+                                            <a href={follower.html_url}>{follower.login}</a>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
                     </div>
-                    <img className='git-chart' src={`https://ghchart.rshah.org/409ba5/${this.state.userData.login}`} alt={`${this.state.userData.name}'s Github chart`} />
-                    {/* {new GitHubCalendar('calendar', 'VanshikaP')} */}
                 </div>
+                <img className='git-chart' src={`https://ghchart.rshah.org/409ba5/${this.state.userData.login}`} alt={`${this.state.userData.name}'s Github chart`} />
+                    {/* {new GitHubCalendar('calendar', 'VanshikaP')} */}
             </div>
         )
     }
