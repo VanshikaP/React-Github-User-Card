@@ -7,6 +7,7 @@ import Container from '@material-ui/core/Container'
 
 class UserCard extends Component {
    state = {
+            username: this.props.username === '' ? 'VanshikaP' : this.props.username,
             userData: [],
             followers: [],
             followers_display: false,
@@ -16,19 +17,37 @@ class UserCard extends Component {
         }
     componentDidMount(){
         //Setting UserData
-        Axios.get('https://api.github.com/users/VanshikaP')
+        Axios.get(`https://api.github.com/users/${this.state.username}`)
         .then(response => {
             console.log(response.data);
             this.setState({
                 ...this.state, userData: response.data
             })
         })
-        .catch(err => console.log('Error ', err.message))       
+        .catch(err => console.log('Error ', err.message))  
+        console.log('Props here', this.props);     
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('Previous: ', Object.keys(prevState.userData).length, 'Current: ', Object.keys(this.state.userData).length)
+        // console.log('Previous: ', Object.keys(prevState.userData).length, 'Current: ', Object.keys(this.state.userData).length)
+        if(prevProps.username !== this.props.username){
+            console.log('Props here', this.props); 
+            this.setState({
+                ...this.state,
+                username: this.props.username
+            })
+        }
         if(prevState.userData !== this.state.userData){
+
+            //Setting User Data
+            Axios.get(`https://api.github.com/users/${this.state.username}`)
+            .then(response => {
+                console.log(response.data);
+                this.setState({
+                    ...this.state, userData: response.data
+                })
+            })
+            .catch(err => console.log('Error ', err.message))  
 
              // Setting Followers
 

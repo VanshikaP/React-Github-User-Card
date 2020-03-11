@@ -77,3 +77,11 @@ h1{
   margin: 0;
 }
 
+.user-form{
+  display: flex;
+  justify-content: space-evenly;
+  margin: 5% 0;
+}
+
+
+
