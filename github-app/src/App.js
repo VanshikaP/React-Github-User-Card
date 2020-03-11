@@ -7,6 +7,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+        <h1>My GitHub Profile</h1>
         <UserCard />
       </div>
     );

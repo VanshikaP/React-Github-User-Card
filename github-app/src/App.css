@@ -1,45 +1,79 @@
+@import url('https://fonts.googleapis.com/css?family=Kanit&display=swap');
+
 .App {
+  /* text-align: center; */
+  font-family: 'Kanit', sans-serif;
+}
+h1{
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* .body{
+  
+} */
+.user-container{
+  background-color: rgb(240, 248, 248);
+  box-shadow: 10px 12px 12px rgba(33, 44, 44, 0.336);
+  border: 2px double rgba(33, 44, 44, 0.336);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  padding: 5% 10%;
+}
+.info{
+  width: 80%;
+  margin: 2% auto;
+  display: flex;
+  justify-content: space-between;
+}
+.info-img{
+  width: 20vw;
+}
+.info-text{
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  margin-left: 5%;
+  align-content: flex-start;
 }
-
-.App-link {
-  color: #61dafb;
+.people{
+  display: flex;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.people-display{
+  color: blue;
 }
-
-.user-container{
-  background-color: aqua;
+.people-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
 }
 .close{
   display: none;
 }
+.people-card{
+  display: flex;
+  justify-content: flex-start;
+  margin: 2% 0;
+  align-items: center;
+  box-shadow: 4px 6px 6px rgba(33, 44, 44, 0.336);
+  border: 1px solid rgba(33, 44, 44, 0.336);
+}
+.people-img{
+  width: 10vw;
+  margin-right: 5%;
+}
+.git-chart{
+  width: 100%;
+  margin: 2% auto;
+  padding: 2%;
+  text-align: center;
+}
+.git-chart-img{
+  width: 100%;
+  margin: 0;
+  background-color: white;
+}
+.git-chart h3{
+  margin: 0;
+}
+

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Axios from 'axios';
 
+import Container from '@material-ui/core/Container'
+
 // import {GitHubCalendar} from 'github-calendar'
 
 class UserCard extends Component {
@@ -69,44 +71,51 @@ class UserCard extends Component {
     render() {
         console.log('user data', this.state)
         return (
-            <div className='user-container'>
-                <img className='user-img' src={this.state.userData.avatar_url} alt={`${this.state.userData.name}`} />
-                <h2> {this.state.userData.name} </h2>
-                <div className = 'basic'>
-                    <p>GitHub Username: {this.state.userData.login} </p>
-                    <p>Profile: <a href={this.state.userData.html_url}>{this.state.userData.html_url}</a></p>
-                    <div className='prople'>
-                        <div className='followers'>
-                            <p> {this.state.followers.length} <span className='people-display' onClick={this.handleFollowersDisplay}>followers</span></p>
-                            <div className={`followers-div ${!this.state.followers_display ? ' close' : ''}`} id='followers'>
-                                {this.state.followers.map(follower => {
-                                    return (
-                                        <div className='follower-card'>
-                                            <img className='follower-img' src={follower.avatar_url} alt={follower.login} />
-                                            <a href={follower.html_url}>{follower.login}</a>
-                                        </div>
-                                    )
-                                })}
-                            </div>
+            <Container maxWidth='md' className='user-container'>
+                
+                <Container className = 'info'>
+                    <img className='info-img' src={this.state.userData.avatar_url} alt={`${this.state.userData.name}`} />
+                    <Container className='info-text'>
+                        <h2>{this.state.userData.name}</h2>
+                        <p>GitHub Username: {this.state.userData.login} </p>
+                        <p>Profile: <a href={this.state.userData.html_url}>{this.state.userData.html_url}</a></p>
+                    </Container>
+                </Container>
+
+                <Container className='people'>
+                    <Container maxWidth='md' className='followers'>
+                        <p> {this.state.followers.length} <span className='people-display' onClick={this.handleFollowersDisplay}>followers</span></p>
+                        <div className={`people-div ${!this.state.followers_display ? ' close' : ''}`}>
+                            {this.state.followers.map(follower => {
+                                return (
+                                    <div className='people-card'>
+                                        <img className='people-img' src={follower.avatar_url} alt={follower.login} />
+                                        <a href={follower.html_url}>{follower.login}</a>
+                                    </div>
+                                )
+                            })}
                         </div>
-                        <div className='following'>
-                            <p> {this.state.following.length} <span className='people-display' onClick={this.handleFollowingDisplay}>following</span></p>
-                            <div className={`following-div ${!this.state.following_display ? ' close' : ''}`} id='following'>
-                                {this.state.following.map(follower => {
-                                    return (
-                                        <div className='follower-card'>
-                                            <img className='follower-img' src={follower.avatar_url} alt={follower.login} />
-                                            <a href={follower.html_url}>{follower.login}</a>
-                                        </div>
-                                    )
-                                })}
-                            </div>
+                    </Container>
+                    <Container maxWidth='md' className='following'>
+                        <p> {this.state.following.length} <span className='people-display' onClick={this.handleFollowingDisplay}>following</span></p>
+                        <div className={`people-div ${!this.state.following_display ? ' close' : ''}`}>
+                            {this.state.following.map(following => {
+                                return (
+                                    <div className='people-card'>
+                                        <img className='people-img' src={following.avatar_url} alt={following.login} />
+                                        <a href={following.html_url}>{following.login}</a>
+                                    </div>
+                                )
+                            })}
                         </div>
-                    </div>
-                </div>
-                <img className='git-chart' src={`https://ghchart.rshah.org/409ba5/${this.state.userData.login}`} alt={`${this.state.userData.name}'s Github chart`} />
+                    </Container>
+                </Container>
+                <Container className='git-chart'>
+                    <img className='git-chart-img' src={`https://ghchart.rshah.org/409ba5/${this.state.userData.login}`} alt={`${this.state.userData.name}'s Github chart`} />
                     {/* {new GitHubCalendar('calendar', 'VanshikaP')} */}
-            </div>
+                    <h3>Contribution Chart</h3>
+                </Container>
+            </Container>
         )
     }
 }
